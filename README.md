@@ -28,7 +28,7 @@ Usage: wscat [options] (--listen <port> | --connect <url>)
     -H, --header <header:value>   Set an HTTP header. Repeat to set multiple. (--connect only)
     --auth <username:password>    Add basic HTTP authentication header. (--connect only)
     -r, --retry                   Retry on disconnection. (--connect only)
-    -k, --keepalive <interval>    send a ping every interval microseconds
+    -k, --keepalive <interval>    send a ping every interval milliseconds
     -P, --parsecommands           parse input for commands (send, ping, pong, close, etc.)
 ```
 ## Examples
