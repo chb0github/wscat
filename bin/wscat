@@ -200,6 +200,10 @@ program
   .option('-r, --retry', 'Retry on disconnection. (--connect only)')
   .option('-k, --keepalive <interval>', 'send a ping every interval seconds')
   .option('-P, --parsecommands', 'parse input for commands (send, ping, pong, close, etc.)')
+  .option('--map <file>', 'will load the .js file supplied and supply the message to the default function for mapping. Look at tojson.js for an example',require)
+  .option('--json', 'assumes the input messages are a form of json and formats them',function() {
+    return require('./tojson')
+  })
   .parse(process.argv);
 
 if (program.listen && program.connect) {
@@ -293,6 +297,11 @@ if (program.listen && program.connect) {
   if (program.subprotocol) options.protocol = program.subprotocol;
   if (program.host) options.host = program.host;
   if (!program.check) options.rejectUnauthorized = program.check;
+  if(program.json)
+    program.map = program.json;
+
+
+
 
   var headers = into({}, (program.header || []).map(function split(s) {
     return splitOnce(':', s);
@@ -379,7 +388,7 @@ if (program.listen && program.connect) {
     }).on('message', function message(data, flags) {
       messagesReceived++;
     lastMessage = data;
-      wsConsole.print('< ' + data, Console.Colors.Blue);
+      wsConsole.print(program.map(data), Console.Colors.Blue);
     }).on('pong', function pong(data, flags) {
     pongsReceived++;
     wsConsole.print('pong Received', Console.Colors.Green);

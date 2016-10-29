@@ -29,6 +29,8 @@ Usage: wscat [options] (--listen <port> | --connect <url>)
     --auth <username:password>    Add basic HTTP authentication header. (--connect only)
     -r, --retry                   Retry on disconnection. (--connect only)
     -k, --keepalive <interval>    send a ping every interval milliseconds
+    --json,                       assumes the input messages are a form of json and formats them
+    --map <file.js>,              will load the .js file supplied and supply the message to the default function for mapping. Look at tojson.js for an example
     -P, --parsecommands           parse input for commands (send, ping, pong, close, etc.)
 ```
 ## Examples
@@ -41,6 +43,8 @@ connected (press CTRL+C to terminate)
 > hello
 < hello
 ```
+
+
 ### Using --parsecommands
 ```
 $wscat -c wss://echo.websocket.org --parsecommands
