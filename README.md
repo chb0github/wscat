@@ -4,10 +4,10 @@ WebSocket cat.
 
 ## Installation
 
-This module needs to be installed globally so use the `-g` flag when installing:
+This module should be installed locally:
 
 ```
-npm install -g wscat
+npm install wscat
 ```
 ## Help
 ```
